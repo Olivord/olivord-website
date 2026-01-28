@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APSARA - Historia Ilustrada</title>
+    <meta name="description" content="Una historia ilustrada épica. Apsara busca a su hermano en un mundo devastado por la guerra.">
+    <style>
+        :root {
+            --color-primary: #0a0e27;
+            --color-secondary: #1a1f3a;
+            --color-accent: #7c3aed;
+            --color-accent-light: #a78bfa;
+            --color-text: #e5e7eb;
+            --color-text-muted: #9ca3af;
+            --color-border: #2d3748;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--color-primary);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* NAVEGACIÓN */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: linear-gradient(180deg, var(--color-primary) 0%, rgba(10, 14, 39, 0.95) 100%);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--color-border);
+            padding: 1rem 0;
+        }
+
+        .navbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-logo {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: var(--color-text);
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 0.15em;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-logo:hover {
+            color: var(--color-accent-light);
+            transform: translateY(-2px);
+        }
+
+        .logo-subtitle {
+            font-size: 0.65rem;
+            color: var(--color-text-muted);
+            letter-spacing: 0.05em;
+            margin-top: 0.25rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--color-text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--color-accent-light);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link-highlight {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--color-accent);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link-highlight:hover {
+            background: var(--color-accent);
+            color: var(--color-primary);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--color-accent) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.1;
+            animation: drift 20s infinite linear;
+        }
+
+        @keyframes drift {
+            from { transform: translate(0, 0); }
+            to { transform: translate(50px, 50px); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            max-width: 900px;
+            padding: 2rem;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            letter-spacing: 0.2em;
+            background: linear-gradient(135deg, var(--color-text), var(--color-accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--color-text-muted);
+            letter-spacing: 0.1em;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--color-accent);
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--color-accent);
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* SECTIONS */
+        .section {
+            padding: 5rem 0;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .container {
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            text-align: center;
+            margin-bottom: 3rem;
+            letter-spacing: 0.1em;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--color-accent);
+            margin: 1rem auto;
+        }
+
+        /* CAPÍTULOS */
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .chapter-card {
+            background: var(--color-secondary);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+            transition: all 0.3s ease;
+        }
+
+        .chapter-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(124, 58, 237, 0.2);
+            border-color: var(--color-accent);
+        }
+
+        .chapter-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .chapter-content {
+            padding: 1.5rem;
+        }
+
+        .chapter-number {
+            color: var(--color-accent);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--color-text);
+        }
+
+        .chapter-description {
+            color: var(--color-text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .read-button {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            color: var(--color-accent);
+            border: 2px solid var(--color-accent);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .read-button:hover {
+            background: var(--color-accent);
+            color: var(--color-primary);
+        }
+
+        /* FOOTER */
+        .footer {
+            background: var(--color-secondary);
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-link {
+            color: var(--color-text);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: var(--color-accent);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .hero {
+                min-height: 80vh;
+            }
+            
+            .section {
+                padding: 3rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVEGACIÓN -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-logo">
+                <span class="logo-text">APSARA</span>
+                <span class="logo-subtitle">Historia Ilustrada</span>
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="#inicio" class="nav-link">INICIO</a></li>
+                <li><a href="#historias" class="nav-link">HISTORIAS</a></li>
+                <li><a href="#galeria" class="nav-link">GALERÍA</a></li>
+                <li><a href="#sobre-mi" class="nav-link">SOBRE MÍ</a></li>
+                <li><a href="#shop" class="nav-link nav-link-highlight">SHOP</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">APSARA</h1>
+            <p class="hero-subtitle">UNA HISTORIA ILUSTRADA ÉPICA</p>
+            <a href="#historias" class="cta-button">COMENZAR LECTURA</a>
+        </div>
+    </section>
+
+    <!-- HISTORIAS / CAPÍTULOS -->
+    <section id="historias" class="section">
+        <div class="container">
+            <h2 class="section-title">CAPÍTULOS</h2>
+            
+            <div class="chapters-grid">
+                <!-- CAPÍTULO 0 -->
+                <article class="chapter-card">
+                    <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800" alt="Capítulo 0" class="chapter-image">
+                    <div class="chapter-content">
+                        <div class="chapter-number">CAPÍTULO 0</div>
+                        <h3 class="chapter-title">La Chica de las Ruinas</h3>
+                        <p class="chapter-description">Apsara despierta en las ruinas de Solaria. No recuerda su pasado, pero sabe lo que debe hacer: encontrar a su hermano y proteger a su hermana. En un mundo devastado por la guerra, la esperanza es un lujo. Pero ella no está dispuesta a rendirse.</p>
+                        <a href="#cap-0" class="read-button">LEER AHORA</a>
+                    </div>
+                </article>
+
+                <!-- PRÓXIMAMENTE -->
+                <article class="chapter-card" style="opacity: 0.6;">
+                    <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800" alt="Próximamente" class="chapter-image">
+                    <div class="chapter-content">
+                        <div class="chapter-number">CAPÍTULO 1</div>
+                        <h3 class="chapter-title">Próximamente</h3>
+                        <p class="chapter-description">La historia continúa...</p>
+                        <a href="#" class="read-button" style="opacity: 0.5; pointer-events: none;">PRÓXIMAMENTE</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOBRE MÍ -->
+    <section id="sobre-mi" class="section" style="background: var(--color-secondary);">
+        <div class="container">
+            <h2 class="section-title">SOBRE EL PROYECTO</h2>
+            <div style="max-width: 800px; margin: 0 auto; text-align: center; color: var(--color-text-muted); line-height: 1.8;">
+                <p style="margin-bottom: 1.5rem;">APSARA es una historia ilustrada épica que combina narrativa inmersiva con arte visual impactante.</p>
+                <p>Creada por <strong style="color: var(--color-accent);">Olivord</strong>, esta historia explora temas de pérdida, esperanza y redención en un mundo post-apocalíptico.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://artstation.com/olivord" target="_blank" class="social-link" title="ArtStation">🎨</a>
+                <a href="https://github.com/Olivord" target="_blank" class="social-link" title="GitHub">💻</a>
+            </div>
+            <p style="color: var(--color-text-muted); font-size: 0.9rem;">
+                © 2026 APSARA. Todos los derechos reservados.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
